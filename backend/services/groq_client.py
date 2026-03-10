@@ -29,6 +29,18 @@ class GroqClient:
         )
         return response.choices[0].message.content or ""
 
+    def chat(self, prompt: str) -> str:
+        """Generic chat completion helper with a single user prompt."""
+        return self._chat_completion(
+            [
+                {
+                    "role": "system",
+                    "content": "You are a helpful assistant for an AI-first CRM system.",
+                },
+                {"role": "user", "content": prompt},
+            ]
+        )
+
     def summarize_text(self, text: str) -> str:
         prompt = (
             "You are an assistant for pharmaceutical field reps. "
